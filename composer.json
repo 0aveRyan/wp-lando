@@ -1,0 +1,16 @@
+{
+    "name": "0averyan/wp-lando",
+    "description": "WP-CLI command for developers working with Lando.",
+    "authors": [
+        {
+            "name": "David Ryan",
+            "email": "dryanpress@chat.wordpress.org"
+        }
+    ],
+    "autoload": {
+        "files": [
+            "command.php"
+        ]
+    },
+    "require": {}
+}
