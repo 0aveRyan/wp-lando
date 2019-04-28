@@ -126,7 +126,6 @@ class Command extends WP_CLI_Command {
 
         $this->enable_dev_plugins();
         $this->wipe_themes();
-        WP_CLI::runcommand( "admin" );
     }
 
     protected function enable_dev_plugins() {
