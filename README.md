@@ -30,6 +30,18 @@ I recommend forking this, because it installs a bunch of personal preferences an
 
 `wp lando install [subdomain-string/site_url]`
 
+##### Parameters
+
+* `wp lando install $url` or `--url=` [string]
+
+Lando puts sites at `https://{slug}.lndo.site`, so you can type either the slug or the full URL 
+
+* `wp lando install $url $title` or `--title=` [string]
+
+This allows you to set the Site Title.
+
+--
+
 I realized that for months I was spending about 30-60 minutes each week -- or a total of 48 hours annually -- configuring environments, installing the tools I needed as-needed, etc.
 
 So instead of writing a script, I spent an hour writing a custom WP-CLI Command I can install as a WP-CLI Package.
