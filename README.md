@@ -30,6 +30,8 @@ I recommend forking this, because it installs a bunch of personal preferences an
 
 `wp lando install [subdomain-string/site_url]`
 
+(if you're using this with Lando, you're probably typing `lando wp lando install ...`)
+
 ##### Parameters
 
 * `wp lando install $url` or `--url=` [string]
