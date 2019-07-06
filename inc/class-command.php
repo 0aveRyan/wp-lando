@@ -149,15 +149,7 @@ class Command extends WP_CLI_Command {
     }
     
     protected function content_import() {
-        Utils\http_request( 
-            'GET',
-            'https://raw.githubusercontent.com/0aveRyan/wp-lando/master/blockdemos.WordPress.2019-07-06.xml',
-            null,
-            array(),
-            array(
-                'filename' => ABSPATH . '/tmp/content.xml'
-            ),
-        );
+        shell_exec( 'curl https://raw.githubusercontent.com/0aveRyan/wp-lando/master/blockdemos.WordPress.2019-07-06.xml --output content.xml' );
     }
 
     protected function colorize_log( $message = '', $bg_color = '', $text_color = '' ) {
