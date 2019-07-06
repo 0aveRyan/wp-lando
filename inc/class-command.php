@@ -148,7 +148,10 @@ class Command extends WP_CLI_Command {
     }
     
     protected function content_import() {
-        $response = wp_remote_get(
+        /**
+         * Using WordPress' wp_remote_get over WP-CLI b/c WordPress gotta be 'round to import anyways
+         */
+        $response = \wp_remote_get(
             'https://raw.githubusercontent.com/0aveRyan/wp-lando/master/blockdemos.WordPress.2019-07-06.xml',
             array(
                 'timeout' => 15,
