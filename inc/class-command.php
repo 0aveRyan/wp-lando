@@ -157,6 +157,7 @@ class Command extends WP_CLI_Command {
             array(
                 'filename' => ABSPATH . '/tmp/content.xml'
             ),
+        );
     }
 
     protected function colorize_log( $message = '', $bg_color = '', $text_color = '' ) {
