@@ -3,6 +3,7 @@ namespace Lando\Cloud_City;
 
 use \WP_CLI;
 use \WP_CLI_Command;
+use \WP_CLI\Utils;
 
 /**
  * Use WP-CLI with Lando.
@@ -148,17 +149,14 @@ class Command extends WP_CLI_Command {
     }
     
     protected function content_import() {
-        /**
-         * Using WordPress' wp_remote_get over WP-CLI b/c WordPress gotta be 'round to import anyways
-         */
-        $response = \wp_remote_get(
+        Utils\http_request( 
+            'GET',
             'https://raw.githubusercontent.com/0aveRyan/wp-lando/master/blockdemos.WordPress.2019-07-06.xml',
+            null,
+            array(),
             array(
-                'timeout' => 15,
-                'stream'  => true,
-                'filename' => 'content.xml',
-            )
-        );
+                'filename' => ABSPATH . '/tmp/content.xml'
+            ),
     }
 
     protected function colorize_log( $message = '', $bg_color = '', $text_color = '' ) {
