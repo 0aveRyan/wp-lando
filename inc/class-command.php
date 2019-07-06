@@ -59,18 +59,7 @@ class Command extends WP_CLI_Command {
         WP_CLI::runcommand( 'cli update' );
         WP_CLI::runcommand( 'core download' );
 
-        WP_CLI::runcommand( 
-            implode( ' ', 
-                [
-                    'config',
-                    'create',
-                    '--dbname=wordpress',
-                    '--dbuser=wordpress',
-                    '--dbpass=wordpress',
-                    '--dbhost=database'
-                ] 
-            ) 
-        );
+        WP_CLI::runcommand( 'config create --dbname=wordpress --dbuser=wordpress --dbpass=wordpress --dbhost=database' );
 
         WP_CLI::runcommand( 
             implode( ' ', 
@@ -110,19 +99,23 @@ class Command extends WP_CLI_Command {
             ) 
         );
 
-        WP_CLI::runcommand( 'option update permalink_structure "/%postname%/"' );
+        WP_CLI::runcommand( 'option update permalink_structure "/%postname%/%post_id%/"' );
         WP_CLI::runcommand( 'eval "flush_rewrite_rules();"' );
 
         WP_CLI::runcommand( 'plugin delete akismet hello' );
 
-        WP_CLI::runcommand( "option update blogdescription 'Lando-powered local environment for: " . $url . ".'" );
+        WP_CLI::runcommand( "option update blogdescription 'Welcome to Cloud City'" );
         WP_CLI::runcommand( "option update timezone_string 'America/Phoenix'" );
         WP_CLI::runcommand( "option update blog_privacy '0'" );
         WP_CLI::runcommand( "option update blog_public '0'" );
         WP_CLI::runcommand( "option update default_ping_status 'closed'" );
         WP_CLI::runcommand( "option update image_default_link_type 'none'" );
 
-        WP_CLI::runcommand( "user meta set 1 wp_media_library_mode 'list'" );
+        WP_CLI::runcommand( "user meta set 1 wp_media_library_mode list" );
+        WP_CLI::runcommand( "user meta set 1 show_welcome_panel 0" );
+        WP_CLI::runcommand( "user meta set 1 closedpostboxes_dashboard a:0:{}" );
+        WP_CLI::runcommand( 'user meta set 1 metaboxhidden_dashboard a:2:{i:0;s:21:"dashboard_quick_press";i:1;s:17:"dashboard_primary";}' );
+        WP_CLI::runcommand( 'user meta set 1 meta-box-order_dashboard a:4:{s:6:"normal";s:19:"dashboard_right_now";s:4:"side";s:58:"dashboard_quick_press,dashboard_primary,dashboard_activity";s:7:"column3";s:0:"";s:7:"column4";s:0:"";}' );
 
         $this->enable_dev_plugins();
         $this->wipe_themes();
