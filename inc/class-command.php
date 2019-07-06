@@ -24,6 +24,10 @@ class Command extends WP_CLI_Command {
         $this->content_import();
     }
     
+    public function packages() {
+        $this->install_packages();
+    }
+    
     /**
      * Check dat status.
      *
@@ -81,14 +85,10 @@ class Command extends WP_CLI_Command {
                 ] 
             )
         );
-
-        WP_CLI::runcommand( 'package install wp-cli/doctor-command' );
-        WP_CLI::runcommand( 'package install aaemnnosttv/wp-cli-http-command' );
-        WP_CLI::runcommand( 'package install markri/wp-sec' );
-        WP_CLI::runcommand( 'package install runcommand/hook' );
-        WP_CLI::runcommand( 'package install runcommand/query-debug' );
-        WP_CLI::runcommand( 'package install trepmal/wp-revisions-cli' );
-        WP_CLI::runcommand( 'package install wp-cli/restful' );
+    
+        if ( isset( $assoc_args['packages'] ) ) {
+            $this->install_packages();
+        }
 
         WP_CLI::runcommand( 'site empty --yes' );
         WP_CLI::runcommand( 'widget reset --all' );
@@ -146,6 +146,16 @@ class Command extends WP_CLI_Command {
 
     protected function red_log( $message ) {
         $this->colorize_log( $message, '1', 'W' );
+    }
+    
+    protected function install_packages() {
+        WP_CLI::runcommand( 'package install wp-cli/doctor-command' );
+        WP_CLI::runcommand( 'package install aaemnnosttv/wp-cli-http-command' );
+        WP_CLI::runcommand( 'package install markri/wp-sec' );
+        WP_CLI::runcommand( 'package install runcommand/hook' );
+        WP_CLI::runcommand( 'package install runcommand/query-debug' );
+        WP_CLI::runcommand( 'package install trepmal/wp-revisions-cli' );
+        WP_CLI::runcommand( 'package install wp-cli/restful' );
     }
     
     protected function content_import() {
