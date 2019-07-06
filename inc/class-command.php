@@ -18,6 +18,11 @@ class Command extends WP_CLI_Command {
         'transients-manager',
         'user-role-editor'
     ];
+    
+    public function content( $args, $assoc_args ) {
+        $this->content_import();
+    }
+    
     /**
      * Check dat status.
      *
@@ -85,6 +90,7 @@ class Command extends WP_CLI_Command {
         WP_CLI::runcommand( 'package install wp-cli/restful' );
 
         WP_CLI::runcommand( 'site empty --yes' );
+        WP_CLI::runcommand( 'widget reset --all' );
 
         WP_CLI::runcommand( 
             implode( ' ', 
@@ -92,9 +98,10 @@ class Command extends WP_CLI_Command {
                     'user',
                     'update',
                     '1',
-                    '--first_name=Dave',
-                    '--last_name=Ryan',
-                    '--admin_color=midnight'
+                    '--first_name=Lando',
+                    '--last_name=User',
+                    '--admin_color=midnight',
+                    '--skip-email',
                 ] 
             ) 
         );
@@ -105,18 +112,15 @@ class Command extends WP_CLI_Command {
         WP_CLI::runcommand( 'plugin delete akismet hello' );
 
         WP_CLI::runcommand( "option update blogdescription 'Welcome to Cloud City'" );
-        WP_CLI::runcommand( "option update timezone_string 'America/Phoenix'" );
-        WP_CLI::runcommand( "option update blog_privacy '0'" );
-        WP_CLI::runcommand( "option update blog_public '0'" );
-        WP_CLI::runcommand( "option update default_ping_status 'closed'" );
-        WP_CLI::runcommand( "option update image_default_link_type 'none'" );
+        WP_CLI::runcommand( "option update timezone_string America/Phoenix" );
+        WP_CLI::runcommand( "option update blog_privacy 0" );
+        WP_CLI::runcommand( "option update blog_public 0" );
+        WP_CLI::runcommand( "option update default_ping_status closed" );
+        WP_CLI::runcommand( "option update image_default_link_type none" );
 
         WP_CLI::runcommand( "user meta set 1 wp_media_library_mode list" );
         WP_CLI::runcommand( "user meta set 1 show_welcome_panel 0" );
-        WP_CLI::runcommand( "user meta set 1 closedpostboxes_dashboard a:0:{}" );
-        WP_CLI::runcommand( 'user meta set 1 metaboxhidden_dashboard a:2:{i:0;s:21:"dashboard_quick_press";i:1;s:17:"dashboard_primary";}' );
-        WP_CLI::runcommand( 'user meta set 1 meta-box-order_dashboard a:4:{s:6:"normal";s:19:"dashboard_right_now";s:4:"side";s:58:"dashboard_quick_press,dashboard_primary,dashboard_activity";s:7:"column3";s:0:"";s:7:"column4";s:0:"";}' );
-
+       
         $this->enable_dev_plugins();
         $this->wipe_themes();
     }
@@ -141,6 +145,17 @@ class Command extends WP_CLI_Command {
 
     protected function red_log( $message ) {
         $this->colorize_log( $message, '1', 'W' );
+    }
+    
+    protected function content_import() {
+        $response = wp_remote_get(
+            'https://raw.githubusercontent.com/0aveRyan/wp-lando/master/blockdemos.WordPress.2019-07-06.xml',
+            array(
+                'timeout' => 15,
+                'stream'  => true,
+                'filename' => 'content.xml',
+            )
+        );
     }
 
     protected function colorize_log( $message = '', $bg_color = '', $text_color = '' ) {
