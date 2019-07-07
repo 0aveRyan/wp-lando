@@ -108,7 +108,7 @@ class Command extends WP_CLI_Command {
         );
 
         WP_CLI::runcommand( 'option update permalink_structure "/%postname%/%post_id%/"' );
-        WP_CLI::runcommand( 'eval "flush_rewrite_rules();"' );
+        WP_CLI::runcommand( 'rewrite flush' );
 
         WP_CLI::runcommand( 'plugin delete akismet hello' );
 
@@ -122,8 +122,9 @@ class Command extends WP_CLI_Command {
         WP_CLI::runcommand( "user meta set 1 wp_media_library_mode list" );
         WP_CLI::runcommand( "user meta set 1 show_welcome_panel 0" );
        
-        $this->enable_dev_plugins();
         $this->wipe_themes();
+        $this->enable_dev_plugins();
+        $this->content_import();
     }
 
     protected function enable_dev_plugins() {
@@ -160,6 +161,9 @@ class Command extends WP_CLI_Command {
     
     protected function content_import() {
         shell_exec( 'curl https://raw.githubusercontent.com/0aveRyan/wp-lando/master/blockdemos.WordPress.2019-07-06.xml --output content.xml' );
+        WP_CLI::runcommand( 'plugin install wordpress-importer --activate' );
+        WP_CLI::runcommand( 'import content.xml --authors=create' );
+        WP_CLI::runcommand( 'plugin delete wordpress-importer' );
     }
 
     protected function colorize_log( $message = '', $bg_color = '', $text_color = '' ) {
