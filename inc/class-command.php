@@ -3,7 +3,6 @@ namespace Lando\Cloud_City;
 
 use \WP_CLI;
 use \WP_CLI_Command;
-use \WP_CLI\Utils;
 
 /**
  * Use WP-CLI with Lando.
