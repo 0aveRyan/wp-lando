@@ -1,12 +1,6 @@
-# wp-lando example for WordCamp Orange County 2019
-
-Example custom command in a WP-CLI Package for automating WordPress setup in [Lando](https://github.com/lando/lando) using WP-CLI.
-
-:link: [Slides](https://github.com/0aveRyan/wp-lando/blob/master/take-command-with-custom-wp-cli-commands.pdf)
-
 ## Install This Package
 
-At present, I recommend forking this repo and modifying it to your liking.
+At present, I recommend using this repo for inspiration or forking and modding to your liking.
 
 Or, install this repo as a package.
 
@@ -21,8 +15,6 @@ WordPress Credentials
 User: lando
 Password: lando
 ```
-
-I recommend forking this, because it installs a bunch of personal preferences and names the `lando` user `Dave Ryan`. In the future, I may expand this command to be more reusable or add additional commands as I try to automate more of my Lando workflows.
 
 ## Usage
 
