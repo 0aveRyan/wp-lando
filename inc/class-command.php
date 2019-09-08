@@ -37,17 +37,18 @@ class Command extends WP_CLI_Command {
     public function install( $args, $assoc_args ) {
         $url    = '';
         $title  = 'Site';
+        $subdomain = defined( 'WP_LANDO_SUBDOMAIN' ) ? rtrim( WP_LANDO_SUBDOMAIN, '/' ) : 'lndo.site';
 
         if ( 
             ! empty( $args[0] )
             || ! empty( WP_CLI\Utils\get_flag_value( $assoc_args, 'url' ) )
         ) {
             $url = ! empty( $args[0] ) ? $args[0] : WP_CLI\Utils\get_flag_value( $assoc_args, 'url' );
-            if ( false === stripos( $url, 'lndo.site' ) ) {
-                $url = 'https://' . $url . '.lndo.site/';
+            if ( false === stripos( $url, $subdomain ) ) {
+                $url = 'https://' . $url . '.' $subdomain . '/';
             }
         } else {
-            WP_CLI::error( 'Site URL is required. Try --url="slug" or --url="https://{slug}.lndo.site/' );
+            WP_CLI::error( 'Site URL is required. Try --url="slug" or --url="https://{slug}.' $subdomain );
         }
 
         
