@@ -48,7 +48,7 @@ class Command extends WP_CLI_Command {
                 $url = 'https://' . $url . '.' . $subdomain . '/';
             }
         } else {
-            WP_CLI::error( 'Site URL is required. Try --url="slug" or --url="https://{slug}.' $subdomain );
+            WP_CLI::error( 'Site URL is required. Try --url="slug" or --url="https://{slug}.' . $subdomain );
         }
 
         
