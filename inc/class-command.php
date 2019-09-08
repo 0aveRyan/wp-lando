@@ -37,7 +37,7 @@ class Command extends WP_CLI_Command {
     public function install( $args, $assoc_args ) {
         $url    = '';
         $title  = 'Site';
-        $subdomain = defined( 'WP_LANDO_SUBDOMAIN' ) ? rtrim( WP_LANDO_SUBDOMAIN, '/' ) : 'lndo.site';
+        $subdomain = ! empty( getenv( 'WP_LANDO_SUBDOMAIN' ) ) ? rtrim( getenv( 'WP_LANDO_SUBDOMAIN' ), '/' ) : 'lndo.site';
 
         if ( 
             ! empty( $args[0] )
